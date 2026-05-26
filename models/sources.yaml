@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: raw_optimum
+  - name: optimum
     description: "Raw Optimum data loaded from SFTP ZIP files into BigQuery."
     database: "project-b2a3ecb7-3b81-4883-82d"
     schema: raw_optimum
@@ -19,5 +19,5 @@ sources:
       - name: packages
         description: "Incremental packages export."
 
-      - name: packages_details
+      - name: package_details
         description: "Incremental packages details export."
