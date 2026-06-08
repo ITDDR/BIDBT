@@ -11,6 +11,7 @@ ranked as (
         package_id,
         package_status_id,
         proposal_id,
+        creation_date,
        
 
         row_number() over (
@@ -25,6 +26,7 @@ ranked as (
 select
      package_id,
         package_status_id,
-        proposal_id
+        proposal_id,
+        creation_date
 from ranked
 where row_num = 1

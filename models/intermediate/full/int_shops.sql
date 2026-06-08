@@ -1,2 +1,2 @@
 select shop_id, shop_name, address_city
-from {{ source('optimum', 'shops') }}
+from {{ ref('stg_optimum__shops') }}

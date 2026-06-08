@@ -11,7 +11,7 @@ ranked as (
         client_invoice_id,
         client_invoice_ref,
         client_id,
-        creation_datetime,
+        creation_date,
         update_datetime,
         items_number,
         shop_id,
@@ -29,9 +29,9 @@ select
     client_invoice_id,
         client_invoice_ref,
         client_id,
-        creation_datetime,
+        creation_date,
         update_datetime,
         items_number,
-        shop_id,
+        shop_id
 from ranked
 where row_num = 1

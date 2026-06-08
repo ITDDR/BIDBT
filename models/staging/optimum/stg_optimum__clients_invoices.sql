@@ -12,7 +12,7 @@ renamed as (
         client_invoice_id,
         client_invoice_ref,
         client_id,
-        creation_datetime,
+        cast(creation_datetime as date) as creation_date,
         update_datetime,
         transmission_datetime,
         payment_datetime,

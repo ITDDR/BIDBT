@@ -8,7 +8,7 @@ with source as (
 renamed as (
 
     select
-        detail_id,
+        detail_id as package_detail_id,
         package_id,
         article_code,
         manufacturer_code,
@@ -18,11 +18,13 @@ renamed as (
         product_class,
         product_lpp_code,
         product_quantity,
-        ht_crude_purchase_price,
+        ht_crude_purchase_price as prix_achat_catalogue,
         ttc_discount_percentage,
-        ht_net_purchase_price,
-        ttc_crude_sale_price,
-        ttc_sale_discount,
+        ht_net_purchase_price as prix_achat_magasin,
+        ttc_crude_sale_price as prix_vente_magasin,
+  
+        ttc_sale_discount as rabais_et_remise_ttc,
+        (ttc_crude_sale_price -ttc_sale_discount) * 1.00 / (1 + (sale_tva_rate/100)) as prix_vente_remise_ht,
         ttc_net_sale_price,
         sale_tva_rate,
         ttc_pec_ro_amount,

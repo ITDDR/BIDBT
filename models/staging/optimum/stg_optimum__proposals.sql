@@ -2,37 +2,29 @@ with
 
 source as (
 
-    select * from {{ source('optimum', 'packages') }}
+    select * from {{ source('optimum', 'proposals') }}
 
 ),
 
 renamed as (
 
     select
-        package_id,
-        package_status_id,
         proposal_id,
-        is_with_prescription,
+        visit_id,
+        proposals_status_id as proposal_status_id,
         is_with_glass,
         is_with_lens,
+        is_with_hearing_aid,
         vision_is_vl,
         vision_is_vp,
         vision_is_vi,
         vision_is_vl_vp,
-        package_class,
-        is_refund_offer,
-        is_tp_ro,
-        is_tr_ro,
-        is_tp_rc,
-        is_tr_rc,
-        package_sequence,
+        has_full_health_basket,
+        has_refund_offer,
+        sale_offer_pack,
         cast(creation_datetime as date) as creation_date,
         update_datetime,
         is_deleted,
-        to_review_sale_offer,
-        visit_id,
-        is_with_hearing_aid,
-        is_after_sale_service,
         source_file_name,
         export_date
 

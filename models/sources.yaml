@@ -7,9 +7,13 @@ sources:
     schema: raw_optimum
 
     tables:
+      - name: clients
       - name: shops
         description: "Full shops export."
-
+      - name: articles
+        description: "Full articles export."
+      - name: articles_types
+        description: "Full articles types export."
       - name: clients_invoices
         description: "Incremental client invoices export."
 
@@ -21,3 +25,8 @@ sources:
 
       - name: package_details
         description: "Incremental packages details export."
+      - name: packages_status
+      - name: proposals
+      - name: proposals_status
+      - name: visits
+      - name: visits_status
