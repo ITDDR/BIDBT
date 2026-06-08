@@ -1,0 +1,58 @@
+select 
+    cl.code_postal,
+    cl.ville as ville_client,
+    cl.pays as pays_client,
+    v.amo_name,
+    v.rc1_name,
+    ci.client_invoice_ref,
+    pd.product_quantity,
+    aty.article_type_name,
+    a.article_name,
+    cid.content,
+    cid.eye_side,
+    pd.prix_achat_catalogue,
+    --pd.ttc_discount_percentage,
+    pd.prix_achat_magasin,
+    pd.prix_vente_magasin,
+    pd.rabais_et_remise_ttc,
+    pd.prix_vente_remise_ht,
+
+    pd.sale_tva_rate,
+    ps.package_status_name as package_status,
+    ps.package_status_description as package_status_definition,
+    prs.proposal_status_name as proposal_status,
+    prs.proposal_status_description as proposal_status_definition,
+    cid.vat_rate,
+    s.address_city as ville_magasin, 
+    ci.creation_date as client_invoice_creation_date, 
+    p.creation_date as package_creation_date,
+    v.creation_date as visit_creation_date,
+    ps.package_status_id,
+    cid.client_invoice_detail_id,
+    cid.client_invoice_id,
+    cl.client_id,
+    p.package_id,
+    --ps.package_status_id,
+    pd.package_detail_id,
+    s.shop_id,
+    a.article_code,
+    aty.article_type_id,
+    pr.proposal_id,
+    prs.proposal_status_id,
+    v.visit_id
+
+from 
+{{ ref('int_client_invoices') }} ci 
+join {{ ref('int_client_invoices_details') }} cid using (client_invoice_id) 
+left join {{ ref('int_clients') }} cl using(client_id)
+join {{ ref('int_packages') }} p using (package_id)
+left join {{ ref('int_packages_status') }} ps using (package_status_id)
+left join {{ ref('int_package_details') }} pd using  (package_detail_id)
+
+join {{ ref('int_shops') }} s using(shop_id)
+left join  {{ ref('int_articles') }} a using(shop_id,article_code)
+left join  {{ ref('int_articles_types') }} aty using(article_type_id)
+
+left join {{ ref('int_proposals') }} pr using (proposal_id)
+left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
+left join {{ ref('int_visits') }} v using  (visit_id)
