@@ -14,6 +14,7 @@ sources:
         description: "Full articles export."
       - name: articles_types
         description: "Full articles types export."
+      - name: frame_types
       - name: clients_invoices
         description: "Incremental client invoices export."
 
@@ -25,6 +26,8 @@ sources:
 
       - name: package_details
         description: "Incremental packages details export."
+      - name: packages_details_types
+      - name: package_frame_properties
       - name: packages_status
       - name: proposals
       - name: proposals_status

@@ -20,7 +20,7 @@ ranked as (
         rabais_et_remise_ttc,
         ttc_net_sale_price,
         sale_tva_rate,
-
+        detail_type_id,
         row_number() over (
             partition by package_detail_id
             order by export_date desc
@@ -41,8 +41,9 @@ select
     prix_vente_magasin,
     prix_vente_remise_ht,
     rabais_et_remise_ttc,
-    --ttc_net_sale_price,
-    sale_tva_rate
+    ttc_net_sale_price,
+    sale_tva_rate,
+    detail_type_id
 
 from ranked
 where row_num = 1

@@ -2,11 +2,20 @@ select
     cl.code_postal,
     cl.ville as ville_client,
     cl.pays as pays_client,
+    cl.client_origin, 
     v.amo_name,
     v.rc1_name,
     ci.client_invoice_ref,
     pd.product_quantity,
     aty.article_type_name,
+    ft.frame_type_name,
+    case package_datail_type_name 
+    when 'monture'
+     then concat('monture ', frame_type_name ) 
+     else
+     package_datail_type_name
+     end as    type_article,
+    pdt.package_datail_type_name,
     a.article_name,
     cid.content,
     cid.eye_side,
@@ -16,7 +25,7 @@ select
     pd.prix_vente_magasin,
     pd.rabais_et_remise_ttc,
     pd.prix_vente_remise_ht,
-
+    pd.ttc_net_sale_price,
     pd.sale_tva_rate,
     ps.package_status_name as package_status,
     ps.package_status_description as package_status_definition,
@@ -56,3 +65,6 @@ left join  {{ ref('int_articles_types') }} aty using(article_type_id)
 left join {{ ref('int_proposals') }} pr using (proposal_id)
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
 left join {{ ref('int_visits') }} v using  (visit_id)
+left join {{ ref('int_packages_details_types') }} pdt on pdt.package_detail_type_id = pd.detail_type_id
+left join {{ ref('int_package_frame_properties') }} pfp using (package_detail_id) 
+left join {{ ref('int_frame_types') }} ft using (frame_type_id)
