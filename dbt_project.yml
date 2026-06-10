@@ -42,3 +42,4 @@ models:
       +materialized: table
     datamart:
       +materialized: table
+
