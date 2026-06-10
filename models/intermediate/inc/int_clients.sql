@@ -12,7 +12,7 @@ ranked as (
         code_postal,
         ville,
         pays,
-
+        client_origin,
         row_number() over (
             partition by client_id
             order by update_datetime desc
@@ -26,6 +26,7 @@ select
    client_id,
         code_postal,
         ville,
-        pays
+        pays,
+        client_origin
 from ranked
 where row_num = 1
