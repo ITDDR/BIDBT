@@ -29,12 +29,13 @@ select
     client_invoice_creation_date, 
     package_creation_date,
     visit_creation_date,
+    date_premiere_facture,
     article_code,
     shop_id
 
 from 
 {{ ref('int_client_invoices_extended') }} 
-union all 
+union all by name
 select 
     code_postal,
     ville_client,
@@ -66,6 +67,7 @@ select
     client_invoice_creation_date, 
     package_creation_date,
     visit_creation_date,
+    date_premiere_facture,
     article_code,
     shop_id
 

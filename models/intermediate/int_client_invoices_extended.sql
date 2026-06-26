@@ -36,6 +36,7 @@ select
     ci.creation_date as client_invoice_creation_date, 
     p.creation_date as package_creation_date,
     v.creation_date as visit_creation_date,
+    cpc.date_premiere_facture,
     ps.package_status_id,
     cid.client_invoice_detail_id,
     cid.client_invoice_id,
@@ -55,6 +56,7 @@ from
 
 join {{ ref('int_client_invoices_details') }} cid using (client_invoice_id) 
 left join {{ ref('int_clients') }} cl using(client_id)
+left join {{ ref('client_premiere_facture') }} cpc using(client_id)
 join {{ ref('int_packages') }} p using (package_id)
 left join {{ ref('int_packages_status') }} ps using (package_status_id)
 left join {{ ref('int_package_details') }} pd using  (package_detail_id)
