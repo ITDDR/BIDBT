@@ -54,20 +54,20 @@ select
 from 
 {{ ref('int_client_invoices') }} ci 
 
-join {{ ref('int_client_invoices_details') }} cid using (client_invoice_id) 
-left join {{ ref('int_clients') }} cl using(client_id)
-left join {{ ref('client_premiere_facture') }} cpc using(client_id)
-join {{ ref('int_packages') }} p using (package_id)
-left join {{ ref('int_packages_status') }} ps using (package_status_id)
-left join {{ ref('int_package_details') }} pd using  (package_detail_id)
+join {{ ref('int_client_invoices_details') }} as cid using (client_invoice_id) 
+left join {{ ref('int_clients') }} as cl using(client_id)
+left join {{ ref('client_premiere_facture') }} as cpc using(client_id)
+join {{ ref('int_packages') }} as p using (package_id)
+left join {{ ref('int_packages_status') }} as ps using (package_status_id)
+left join {{ ref('int_package_details') }} as pd using  (package_detail_id)
 
-join {{ ref('int_shops') }} s using(shop_id)
-left join  {{ ref('int_articles') }} a using(shop_id,article_code)
-left join  {{ ref('int_articles_types') }} aty using(article_type_id)
+join {{ ref('int_shops') }} as s using(shop_id)
+left join  {{ ref('int_articles') }} as a using(shop_id,article_code)
+left join  {{ ref('int_articles_types') }} as aty using(article_type_id)
 
-left join {{ ref('int_proposals') }} pr using (proposal_id)
+left join {{ ref('int_proposals') }} as pr using (proposal_id)
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
-left join {{ ref('int_visits') }} v using  (visit_id)
-left join {{ ref('int_packages_details_types') }} pdt on pdt.package_detail_type_id = pd.detail_type_id
-left join {{ ref('int_package_frame_properties') }} pfp using (package_detail_id) 
-left join {{ ref('int_frame_types') }} ft using (frame_type_id)
+left join {{ ref('int_visits') }} as v using  (visit_id)
+left join {{ ref('int_packages_details_types') }} as pdt on pdt.package_detail_type_id = pd.detail_type_id
+left join {{ ref('int_package_frame_properties') }} as pfp using (package_detail_id) 
+left join {{ ref('int_frame_types') }} as ft using (frame_type_id)
