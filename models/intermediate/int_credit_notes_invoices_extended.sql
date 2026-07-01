@@ -14,7 +14,7 @@ select
      then concat('monture ', frame_type_name ) 
      else
      package_datail_type_name
-     end as    type_article,
+     end as    package_detail_type_ddr,
     pdt.package_datail_type_name,
     a.article_name,
     cid.content,
