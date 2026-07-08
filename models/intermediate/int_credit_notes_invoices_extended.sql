@@ -3,6 +3,8 @@ select
     cl.ville as ville_client,
     cl.pays as pays_client,
     cl.client_origin, 
+    cl.client_vente_directe,
+    cl.client_facing_fixe,
     v.amo_name,
     v.rc1_name,
     credit_note_invoice_ref as no_facture,--ci.client_invoice_ref as no_facture,
@@ -49,13 +51,14 @@ select
     aty.article_type_id,
     pr.proposal_id,
     prs.proposal_status_id,
-    v.visit_id
+    v.visit_id,
+    sel.seller_name
 
 from 
-{{ ref('int_credit_notes_invoices') }} cn
-join {{ ref('int_credit_notes_invoices_details') }} cnd using (credit_note_invoice_id) 
-left join {{ ref('client_premiere_facture') }} cpc using(client_id)
-join {{ ref('int_client_invoices_details') }} cid using (client_invoice_detail_id) 
+{{ ref('int_credit_notes_invoices') }} as cn
+join {{ ref('int_credit_notes_invoices_details') }} as cnd using (credit_note_invoice_id) 
+left join {{ ref('client_premiere_facture') }} as cpc using(client_id)
+join {{ ref('int_client_invoices_details') }} as cid using (client_invoice_detail_id) 
 left join {{ ref('int_clients') }} cl using(client_id)
 join {{ ref('int_packages') }} p using (package_id)
 left join {{ ref('int_packages_status') }} ps using (package_status_id)
@@ -68,6 +71,7 @@ left join  {{ ref('int_articles_types') }} aty using(article_type_id)
 left join {{ ref('int_proposals') }} pr using (proposal_id)
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
 left join {{ ref('int_visits') }} v using  (visit_id)
+left join {{ ref('int_sellers') }} as sel using(seller_id)
 left join {{ ref('int_packages_details_types') }} pdt on pdt.package_detail_type_id = pd.detail_type_id
 left join {{ ref('int_package_frame_properties') }} pfp using (package_detail_id) 
 left join {{ ref('int_frame_types') }} ft using (frame_type_id)

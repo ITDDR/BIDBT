@@ -13,6 +13,8 @@ ranked as (
         ville,
         pays,
         client_origin,
+        client_vente_directe,
+        client_facing_fixe,
         row_number() over (
             partition by client_id
             order by update_datetime desc
@@ -27,6 +29,9 @@ select
         code_postal,
         ville,
         pays,
-        client_origin
+        client_origin,
+        client_vente_directe,
+        client_facing_fixe
+
 from ranked
 where row_num = 1

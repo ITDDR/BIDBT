@@ -15,10 +15,18 @@ renamed as (
         client_migration_id,
         shop_id,
         client_origin,
-        family_name,
         civility_id,
-        first_name,
-        last_name,
+        case 
+            when REGEXP_CONTAINS( upper(last_name), 'VENTE_LIBRE') or
+             (REGEXP_CONTAINS( upper(last_name), 'VENTE') and REGEXP_CONTAINS( upper(first_name), 'DIRECTE'))
+        then 1
+        else 0
+        end as client_vente_directe,
+        case 
+            when REGEXP_CONTAINS( upper(last_name), 'FACING') 
+        then 1
+        else 0
+        end as client_facing_fixe,
         maiden_name,
         social_security_code,
         mobile_phone,

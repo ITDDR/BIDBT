@@ -31,5 +31,6 @@ sources:
       - name: packages_status
       - name: proposals
       - name: proposals_status
+      - name: sellers
       - name: visits
       - name: visits_status
