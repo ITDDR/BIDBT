@@ -22,7 +22,6 @@ select
     cid.content,
     cid.eye_side,
     pd.prix_achat_catalogue,
-    --pd.ttc_discount_percentage,
     pd.prix_achat_magasin,
     pd.prix_vente_magasin,
     pd.rabais_et_remise_ttc,
@@ -44,7 +43,6 @@ select
     cid.client_invoice_id,
     cl.client_id,
     p.package_id,
-    --ps.package_status_id,
     pd.package_detail_id,
     s.shop_id,
     a.article_code,
@@ -53,7 +51,6 @@ select
     prs.proposal_status_id,
     v.visit_id,
     sel.seller_name 
-
 from 
 {{ ref('int_client_invoices') }} ci 
 
