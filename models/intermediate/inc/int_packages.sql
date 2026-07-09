@@ -11,6 +11,7 @@ ranked as (
         package_id,
         package_status_id,
         proposal_id,
+        to_review_sale_offer,
         creation_date,
         
 
@@ -27,7 +28,7 @@ select
      package_id,
         package_status_id,
         proposal_id,
-        
+        to_review_sale_offer,
         creation_date
 from ranked
 where row_num = 1

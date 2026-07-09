@@ -21,7 +21,7 @@ renamed as (
         vision_is_vl_vp,
         has_full_health_basket,
         has_refund_offer,
-        sale_offer_pack,
+        --sale_offer_pack, --only null values
         cast(creation_datetime as date) as creation_date,
         update_datetime,
         is_deleted,
