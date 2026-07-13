@@ -13,13 +13,8 @@ ranked as (
         article_code,
         product_quantity,
         prix_achat_catalogue,
-        ttc_discount_percentage,
         prix_achat_magasin,
-        prix_vente_magasin,
         prix_vente_remise_ht,
-        rabais_et_remise_ttc,
-        ttc_net_sale_price,
-        sale_tva_rate,
         detail_type_id,
         row_number() over (
             partition by package_detail_id
@@ -32,17 +27,12 @@ ranked as (
 
 select
     package_id,
-    package_detail_id ,
+    package_detail_id,
     article_code,
     product_quantity,
     prix_achat_catalogue,
-    ttc_discount_percentage,
     prix_achat_magasin,
-    prix_vente_magasin,
     prix_vente_remise_ht,
-    rabais_et_remise_ttc,
-    ttc_net_sale_price,
-    sale_tva_rate,
     detail_type_id
 
 from ranked

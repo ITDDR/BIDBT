@@ -12,8 +12,7 @@ ranked as (
         package_status_id,
         proposal_id,
         to_review_sale_offer,
-        creation_date,
-        
+        package_creation_date,
 
         row_number() over (
             partition by package_id
@@ -25,10 +24,10 @@ ranked as (
 )
 
 select
-     package_id,
-        package_status_id,
-        proposal_id,
-        to_review_sale_offer,
-        creation_date
+    package_id,
+    package_status_id,
+    proposal_id,
+    to_review_sale_offer,
+    package_creation_date
 from ranked
 where row_num = 1

@@ -9,9 +9,9 @@ ranked as (
 
     select
         client_invoice_id,
-        client_invoice_ref,
+        no_facture,
         client_id,
-        creation_date,
+        client_invoice_creation_date,
         update_datetime,
         items_number,
         shop_id,
@@ -27,11 +27,11 @@ ranked as (
 
 select
     client_invoice_id,
-        client_invoice_ref,
-        client_id,
-        creation_date,
-        update_datetime,
-        items_number,
-        shop_id
+    no_facture,
+    client_id,
+    client_invoice_creation_date,
+    update_datetime,
+    items_number,
+    shop_id
 from ranked
 where row_num = 1

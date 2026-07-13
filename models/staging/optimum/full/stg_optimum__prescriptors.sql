@@ -1,20 +1,10 @@
-with 
-
-source as (
-
+with source as (
     select * from {{ source('optimum', 'prescriptors') }}
-
-),
-
-renamed as (
-
-    select
-        prescriptor_id,
-        prescriptor_name,
-        prescriptor_first_name
-
-    from source
-
 )
 
-select * from renamed
+select
+    prescriptor_id,
+    prescriptor_name,
+    prescriptor_first_name,
+    concat(coalesce(prescriptor_name,''), ' ',coalesce(prescriptor_first_name,'')) as prescriptor_full_name
+from source

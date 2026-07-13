@@ -9,9 +9,6 @@ ranked as (
 
     select
         client_id,
-        code_postal,
-        ville,
-        pays,
         client_origin,
         client_vente_directe,
         client_facing_fixe,
@@ -26,9 +23,6 @@ ranked as (
 
 select
    client_id,
-        code_postal,
-        ville,
-        pays,
         client_origin,
         client_vente_directe,
         client_facing_fixe
