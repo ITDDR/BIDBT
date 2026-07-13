@@ -36,7 +36,10 @@ select
     article_code,
     shop_id,
     seller_name,
-    client_id
+    client_id,
+    sale_offer_name,
+    prescriptor_name
+
 
 from 
 {{ ref('int_client_invoices_extended') }} 
@@ -71,7 +74,9 @@ select
     article_code,
     shop_id,
     seller_name,
-    client_id
+    client_id,
+    sale_offer_name,
+    prescriptor_name
 
 from 
 {{ ref('int_credit_notes_invoices_extended') }} 

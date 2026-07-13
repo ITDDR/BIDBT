@@ -5,8 +5,7 @@ select
     cl.client_origin, 
     cl.client_vente_directe,
     cl.client_facing_fixe,
-    v.amo_name,
-    v.rc1_name,
+
     ci.client_invoice_ref as no_facture,
     pd.product_quantity,
     aty.article_type_name,
@@ -51,9 +50,9 @@ select
     prs.proposal_status_id,
     v.visit_id,
     sel.seller_name ,
-    seller_vpp.seller_name as vpp_seller_name,
-    pres.prescriptor_name,
-    so.sale_offer_name
+    so.sale_offer_name,
+    prescriptor_id,
+    pres.prescriptor_name
 from 
 {{ ref('int_client_invoices') }} ci 
 
@@ -74,12 +73,11 @@ left join {{ ref('int_proposals') }} as pr using (proposal_id)
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
 left join {{ ref('int_visits') }} as v using  (visit_id)
 left join {{ ref('int_sellers') }} as sel using(seller_id)
+
 left join {{ ref('int_packages_details_types') }} as pdt on pdt.package_detail_type_id = pd.detail_type_id
 left join {{ ref('int_package_frame_properties') }} as pfp using (package_detail_id) 
 left join {{ ref('int_frame_types') }} as ft using (frame_type_id)
 
-left join {{ ref('int_visit_prescription_properties') }} vpp using (visit_id)
-left join {{ ref('int_sellers') }} as seller_vpp on seller_vpp.seller_id = vpp.seller_id
-
+left join {{ ref('int_visit_prescription_properties') }} vpp using(visit_id)
 left join {{ ref('int_prescriptors') }} pres using (prescriptor_id)
 left join {{ ref('int_sales_offers') }} so on so.sale_offer_id = p.to_review_sale_offer

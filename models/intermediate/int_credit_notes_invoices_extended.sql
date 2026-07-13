@@ -52,7 +52,10 @@ select
     pr.proposal_id,
     prs.proposal_status_id,
     v.visit_id,
-    sel.seller_name
+    sel.seller_name,
+    so.sale_offer_name,
+    prescriptor_id,
+    pres.prescriptor_name
 
 from 
 {{ ref('int_credit_notes_invoices') }} as cn
@@ -72,6 +75,11 @@ left join {{ ref('int_proposals') }} pr using (proposal_id)
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
 left join {{ ref('int_visits') }} v using  (visit_id)
 left join {{ ref('int_sellers') }} as sel using(seller_id)
+
 left join {{ ref('int_packages_details_types') }} pdt on pdt.package_detail_type_id = pd.detail_type_id
 left join {{ ref('int_package_frame_properties') }} pfp using (package_detail_id) 
 left join {{ ref('int_frame_types') }} ft using (frame_type_id)
+
+left join {{ ref('int_visit_prescription_properties') }} vpp using(visit_id)
+left join {{ ref('int_prescriptors') }} pres using (prescriptor_id)
+left join {{ ref('int_sales_offers') }} so on so.sale_offer_id = p.to_review_sale_offer
