@@ -7,8 +7,8 @@ source as (
 )
 
 select
-    client_id,
-    client_origin,
+    client_id as idClient,
+    client_origin as provenance,
     case 
         when REGEXP_CONTAINS(upper(last_name), 'VENTE_LIBRE') or
              (REGEXP_CONTAINS(upper(last_name), 'VENTE') and REGEXP_CONTAINS(upper(first_name), 'DIRECTE'))

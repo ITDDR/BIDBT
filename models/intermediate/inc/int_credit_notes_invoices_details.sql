@@ -8,18 +8,13 @@ with source as (
 ranked as (
 
     select
-       credit_note_invoice_detail_id,
         credit_note_invoice_id,
-        content,
         quantity,
-        eye_side,
         credit_note_value_without_vat,
-        credit_note_value_with_vat,
-        sale_datetime,
         client_invoice_detail_id,
 
         row_number() over (
-            partition by credit_note_invoice_detail_id
+            partition by credit_note_invoice_id, client_invoice_detail_id
             order by export_date desc
         ) as row_num
 
@@ -28,14 +23,9 @@ ranked as (
 )
 
 select
-   credit_note_invoice_detail_id,
-        credit_note_invoice_id,
-        content,
-        quantity,
-        eye_side,
-        credit_note_value_without_vat,
-        credit_note_value_with_vat,
-        sale_datetime,
-        client_invoice_detail_id
+    credit_note_invoice_id,
+    quantity,
+    credit_note_value_without_vat,
+    client_invoice_detail_id
 from ranked
 where row_num = 1

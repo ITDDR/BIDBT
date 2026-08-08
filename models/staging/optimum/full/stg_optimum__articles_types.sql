@@ -3,6 +3,5 @@ with source as (
 )
 
 select
-    article_type_id,
-    name as article_type_name
+    article_type_id
 from source

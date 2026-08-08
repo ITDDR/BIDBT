@@ -1,5 +1,4 @@
 select
-    shop_id,
     seller_id,
-    seller_name
+    nom_vendeur
 from {{ ref('stg_optimum__sellers') }}
