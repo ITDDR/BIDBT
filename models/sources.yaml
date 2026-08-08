@@ -17,19 +17,25 @@ sources:
       - name: frame_types
       - name: clients_invoices
         description: "Incremental client invoices export."
-
       - name: clients_invoices_details
         description: "Incremental client invoice details export."
-
+      - name: credit_notes_invoices
+        description: "les avoirs"
+      - name: credit_notes_invoices_details
       - name: packages
         description: "Incremental packages export."
-
       - name: package_details
         description: "Incremental packages details export."
       - name: packages_details_types
       - name: package_frame_properties
       - name: packages_status
+      - name: prescriptors
       - name: proposals
       - name: proposals_status
+      - name: sellers
+      
+      - name: sales_offers
+
       - name: visits
       - name: visits_status
+      - name: visit_prescription_properties
