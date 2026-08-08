@@ -10,7 +10,6 @@ ranked as (
     select
         visit_id,
         prescriptor_id,
-        seller_id,
 
         row_number() over (
             partition by visit_id
@@ -22,8 +21,7 @@ ranked as (
 )
 
 select
-        visit_id,
-        prescriptor_id,
-        seller_id,
+    visit_id,
+    prescriptor_id
 from ranked
 where row_num = 1

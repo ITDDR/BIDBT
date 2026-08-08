@@ -8,12 +8,12 @@ with source as (
 ranked as (
 
     select
-        client_id,
-        client_origin,
+        idClient,
+        provenance,
         client_vente_directe,
         client_facing_fixe,
         row_number() over (
-            partition by client_id
+            partition by idClient
             order by update_datetime desc
         ) as row_num
 
@@ -22,8 +22,8 @@ ranked as (
 )
 
 select
-   client_id,
-        client_origin,
+   idClient,
+        provenance,
         client_vente_directe,
         client_facing_fixe
 

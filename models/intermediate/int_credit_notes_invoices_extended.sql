@@ -1,19 +1,19 @@
-select 
-    cl.client_origin, 
+select
+    cl.provenance,
     cl.client_vente_directe,
     cl.client_facing_fixe,
 
     credit_note_invoice_ref as no_facture,
-    -1 * cnd.quantity as product_quantity,
+    -1 * cnd.quantity as quantite_produit,
     ft.frame_type_name,
-    case pdt.package_datail_type_name 
+    case pdt.package_datail_type_name
     when 'monture'
-     then concat('monture ', ft.frame_type_name ) 
+     then concat('monture ', ft.frame_type_name )
      else
      pdt.package_datail_type_name
      end as package_detail_type_ddr,
     pdt.package_datail_type_name,
-    a.article_name,
+    a.nom_article,
     cid.content,
     cid.eye_side,
     -1 * pd.prix_achat_catalogue as prix_achat_catalogue,
@@ -23,24 +23,24 @@ select
     ps.package_status_definition,
     prs.proposal_status,
     prs.proposal_status_definition,
-    s.ville_magasin, 
-    cn.creation_date as client_invoice_creation_date, 
+    s.ville_magasin,
+    cn.creation_date as client_invoice_creation_date,
     p.package_creation_date,
     v.visit_creation_date,
     cpc.date_premiere_facture,
-    cl.client_id,
+    cl.idClient,
     s.shop_id,
     a.article_code,
-    sel.seller_name,
+    sel.nom_vendeur,
     so.sale_offer_name,
-    pres.prescriptor_name
+    pres.nom_prescripteur
 
-from 
+from
 {{ ref('int_credit_notes_invoices') }} as cn
-join {{ ref('int_credit_notes_invoices_details') }} as cnd using (credit_note_invoice_id) 
-left join {{ ref('client_premiere_facture') }} as cpc using(client_id)
-join {{ ref('int_client_invoices_details') }} as cid using (client_invoice_detail_id) 
-left join {{ ref('int_clients') }} cl using(client_id)
+join {{ ref('int_credit_notes_invoices_details') }} as cnd using (credit_note_invoice_id)
+left join {{ ref('client_premiere_facture') }} as cpc using(idClient)
+join {{ ref('int_client_invoices_details') }} as cid using (client_invoice_detail_id)
+left join {{ ref('int_clients') }} cl using(idClient)
 join {{ ref('int_packages') }} p using (package_id)
 left join {{ ref('int_packages_status') }} ps using (package_status_id)
 left join {{ ref('int_package_details') }} pd using  (package_detail_id)

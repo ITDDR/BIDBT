@@ -8,10 +8,9 @@ with source as (
 ranked as (
 
     select
-        package_id,
         package_detail_id,
         article_code,
-        product_quantity,
+        quantite_produit,
         prix_achat_catalogue,
         prix_achat_magasin,
         prix_vente_remise_ht,
@@ -26,10 +25,9 @@ ranked as (
 )
 
 select
-    package_id,
     package_detail_id,
     article_code,
-    product_quantity,
+    quantite_produit,
     prix_achat_catalogue,
     prix_achat_magasin,
     prix_vente_remise_ht,

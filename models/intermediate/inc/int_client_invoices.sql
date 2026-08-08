@@ -10,10 +10,9 @@ ranked as (
     select
         client_invoice_id,
         no_facture,
-        client_id,
+        idClient,
         client_invoice_creation_date,
         update_datetime,
-        items_number,
         shop_id,
 
         row_number() over (
@@ -28,10 +27,9 @@ ranked as (
 select
     client_invoice_id,
     no_facture,
-    client_id,
+    idClient,
     client_invoice_creation_date,
     update_datetime,
-    items_number,
     shop_id
 from ranked
 where row_num = 1

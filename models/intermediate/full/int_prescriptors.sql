@@ -1,4 +1,4 @@
 select
     prescriptor_id,
-    prescriptor_full_name as prescriptor_name
+    nom_prescripteur
 from {{ ref('stg_optimum__prescriptors') }}

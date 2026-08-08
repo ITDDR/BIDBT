@@ -9,14 +9,9 @@ ranked as (
 
     select
         credit_note_invoice_id,
-        client_invoice_id,
-        client_id,
+        idClient,
         credit_note_invoice_ref,
         creation_date,
-        update_datetime,
-        transmission_datetime,
-        credit_note_invoice_value,
-        action_facture_type_id,
         shop_id,
 
         row_number() over (
@@ -29,15 +24,10 @@ ranked as (
 )
 
 select
-        credit_note_invoice_id,
-        client_invoice_id,
-        client_id,
-        credit_note_invoice_ref,
-        creation_date,
-        update_datetime,
-        transmission_datetime,
-        credit_note_invoice_value,
-        action_facture_type_id,
-        shop_id
+    credit_note_invoice_id,
+    idClient,
+    credit_note_invoice_ref,
+    creation_date,
+    shop_id
 from ranked
 where row_num = 1
