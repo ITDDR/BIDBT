@@ -1,6 +1,6 @@
 select 
   
-    client_origin, 
+    client_origin , 
     client_vente_directe,
     client_facing_fixe,
     no_facture,
@@ -27,7 +27,7 @@ select
     package_status_definition,
     proposal_status,
     proposal_status_definition,
-    --vat_rate,
+
     ville_magasin, 
     client_invoice_creation_date, 
     package_creation_date,
