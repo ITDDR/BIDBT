@@ -22,6 +22,7 @@ select
     prix_achat_magasin,
 
     prix_vente_remise_ht * quantite_produit as prix_vente_remise_ht,
+    rabais_et_remise_ttc,
 
     package_status,
     package_status_definition,
@@ -61,6 +62,7 @@ select
     prix_achat_magasin,
     -1 * prix_vente_remise_ht * quantite_produit as marge_brute,
     prix_vente_remise_ht,
+    rabais_et_remise_ttc,
 
     'Avoir' as package_status,
     'Avoir' as package_status_definition,

@@ -14,6 +14,7 @@ ranked as (
         prix_achat_catalogue,
         prix_achat_magasin,
         prix_vente_remise_ht,
+        rabais_et_remise_ttc,
         detail_type_id,
         row_number() over (
             partition by package_detail_id
@@ -31,6 +32,7 @@ select
     prix_achat_catalogue,
     prix_achat_magasin,
     prix_vente_remise_ht,
+    rabais_et_remise_ttc,
     detail_type_id
 
 from ranked

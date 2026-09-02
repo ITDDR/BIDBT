@@ -19,6 +19,7 @@ select
     -1 * pd.prix_achat_catalogue as prix_achat_catalogue,
     -1 * pd.prix_achat_magasin as prix_achat_magasin,
     -1 * credit_note_value_without_vat as prix_vente_remise_ht,
+    -1 * rabais_et_remise_ttc as rabais_et_remise_ttc,
     ps.package_status,
     ps.package_status_definition,
     prs.proposal_status,

@@ -19,6 +19,7 @@ select
     pd.prix_achat_catalogue,
     pd.prix_achat_magasin,
     pd.prix_vente_remise_ht,
+    pd.rabais_et_remise_ttc,
     ps.package_status,
     ps.package_status_definition,
     prs.proposal_status,
