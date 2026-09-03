@@ -36,7 +36,7 @@ select
     date_premiere_facture,
     article_code,
     shop_id,
-    nom_vendeur,
+    nom_vendeur_proposition,
     idClient,
     sale_offer_name,
     nom_prescripteur
@@ -76,7 +76,7 @@ select
     date_premiere_facture,
     article_code,
     shop_id,
-    nom_vendeur,
+    nom_vendeur_proposition,
     idClient,
     sale_offer_name,
     nom_prescripteur
