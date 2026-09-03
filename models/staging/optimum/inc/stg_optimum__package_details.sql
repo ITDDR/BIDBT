@@ -8,6 +8,7 @@ with source as (
 select
     detail_id as package_detail_id,
     article_code,
+    name as nom_article_package,
     product_quantity as quantite_produit,
     ht_crude_purchase_price as prix_achat_catalogue,
     ht_net_purchase_price as prix_achat_magasin,

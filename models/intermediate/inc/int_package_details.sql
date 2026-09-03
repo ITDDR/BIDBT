@@ -10,6 +10,7 @@ ranked as (
     select
         package_detail_id,
         article_code,
+        nom_article_package,
         quantite_produit,
         prix_achat_catalogue,
         prix_achat_magasin,
@@ -28,6 +29,7 @@ ranked as (
 select
     package_detail_id,
     article_code,
+    nom_article_package,
     quantite_produit,
     prix_achat_catalogue,
     prix_achat_magasin,

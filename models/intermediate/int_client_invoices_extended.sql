@@ -14,6 +14,7 @@ select
      end as package_detail_type_ddr,
     pdt.package_datail_type_name,
     a.nom_article,
+    pd.nom_article_package,
     cid.content,
     cid.eye_side,
     pd.prix_achat_catalogue,
