@@ -32,6 +32,7 @@ select
     cl.idClient,
     s.shop_id,
     a.article_code,
+    pd.nom_article_package,
     sel.nom_vendeur as nom_vendeur_proposition,
     so.sale_offer_name,
     pres.nom_prescripteur

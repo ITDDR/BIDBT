@@ -9,6 +9,7 @@ select
     package_detail_type_ddr,
     package_datail_type_name,
     nom_article,
+    nom_article_package,
     content,
     eye_side,
     case
@@ -56,6 +57,7 @@ select
     package_detail_type_ddr,
     package_datail_type_name,
     nom_article,
+    nom_article_package,
     content,
     eye_side,
     prix_achat_catalogue,
