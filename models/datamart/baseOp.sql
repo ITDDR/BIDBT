@@ -22,6 +22,7 @@ select
     prix_achat_magasin,
 
     prix_vente_remise_ht * quantite_produit as prix_vente_remise_ht,
+    rabais_et_remise_ttc,
 
     package_status,
     package_status_definition,
@@ -35,7 +36,7 @@ select
     date_premiere_facture,
     article_code,
     shop_id,
-    nom_vendeur,
+    nom_vendeur_proposition,
     idClient,
     sale_offer_name,
     nom_prescripteur
@@ -61,6 +62,7 @@ select
     prix_achat_magasin,
     -1 * prix_vente_remise_ht * quantite_produit as marge_brute,
     prix_vente_remise_ht,
+    rabais_et_remise_ttc,
 
     'Avoir' as package_status,
     'Avoir' as package_status_definition,
@@ -74,7 +76,7 @@ select
     date_premiere_facture,
     article_code,
     shop_id,
-    nom_vendeur,
+    nom_vendeur_proposition,
     idClient,
     sale_offer_name,
     nom_prescripteur

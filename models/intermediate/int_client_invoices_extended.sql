@@ -19,6 +19,7 @@ select
     pd.prix_achat_catalogue,
     pd.prix_achat_magasin,
     pd.prix_vente_remise_ht,
+    pd.rabais_et_remise_ttc,
     ps.package_status,
     ps.package_status_definition,
     prs.proposal_status,
@@ -31,7 +32,7 @@ select
     cl.idClient,
     s.shop_id,
     a.article_code,
-    sel.nom_vendeur,
+    sel.nom_vendeur as nom_vendeur_proposition,
     so.sale_offer_name,
     pres.nom_prescripteur
 from
@@ -53,7 +54,8 @@ left join {{ ref('int_proposals') }} as pr using (proposal_id)
 
 left join {{ ref('int_proposals_status') }} prs using (proposal_status_id )
 left join {{ ref('int_visits') }} as v using  (visit_id)
-left join {{ ref('int_sellers') }} as sel using(seller_id)
+left join {{ ref('int_packages_packages_statuts_types') }} as ppst using (package_id) 
+left join {{ ref('int_sellers') }} as sel on sel.seller_id = ppst.proposition_personne_id --using(seller_id)
 
 left join {{ ref('int_packages_details_types') }} as pdt on pdt.package_detail_type_id = pd.detail_type_id
 left join {{ ref('int_package_frame_properties') }} as pfp using (package_detail_id) 
