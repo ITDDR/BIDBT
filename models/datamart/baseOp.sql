@@ -12,19 +12,12 @@ select
     nom_article_package,
     content,
     eye_side,
-    case
-     when prix_achat_magasin <> 0 then
-        prix_vente_remise_ht * quantite_produit - prix_achat_magasin
-        else
-        prix_vente_remise_ht * quantite_produit - prix_achat_catalogue
-        end
-    as marge_brute,
-    prix_achat_catalogue,
-    prix_achat_magasin,
 
-    prix_vente_remise_ht * quantite_produit as prix_vente_remise_ht,
+    prix_achat_catalogue_ht,
+    prix_achat_magasin_ht,
+    prix_vente_remise_ttc,
     rabais_et_remise_ttc,
-
+    taux_tva,
     package_status,
     package_status_definition,
     proposal_status,
@@ -60,12 +53,11 @@ select
     nom_article_package,
     content,
     eye_side,
-    prix_achat_catalogue,
-    prix_achat_magasin,
-    -1 * prix_vente_remise_ht * quantite_produit as marge_brute,
-    prix_vente_remise_ht,
+    prix_achat_catalogue_ht,
+    prix_achat_magasin_ht,
+    prix_vente_remise_ttc , 
     rabais_et_remise_ttc,
-
+    taux_tva,
     'Avoir' as package_status,
     'Avoir' as package_status_definition,
     proposal_status,

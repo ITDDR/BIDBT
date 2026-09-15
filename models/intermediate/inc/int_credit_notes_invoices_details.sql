@@ -10,7 +10,7 @@ ranked as (
     select
         credit_note_invoice_id,
         quantity,
-        credit_note_value_without_vat,
+        credit_note_value_with_vat,
         client_invoice_detail_id,
 
         row_number() over (
@@ -25,7 +25,7 @@ ranked as (
 select
     credit_note_invoice_id,
     quantity,
-    credit_note_value_without_vat,
+    credit_note_value_with_vat,
     client_invoice_detail_id
 from ranked
 where row_num = 1

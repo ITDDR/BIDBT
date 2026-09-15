@@ -12,9 +12,10 @@ ranked as (
         article_code,
         nom_article_package,
         quantite_produit,
-        prix_achat_catalogue,
-        prix_achat_magasin,
-        prix_vente_remise_ht,
+        prix_achat_catalogue_ht,
+        prix_achat_magasin_ht,
+        taux_tva,
+        prix_vente_remise_ttc,
         rabais_et_remise_ttc,
         detail_type_id,
         row_number() over (
@@ -31,9 +32,10 @@ select
     article_code,
     nom_article_package,
     quantite_produit,
-    prix_achat_catalogue,
-    prix_achat_magasin,
-    prix_vente_remise_ht,
+    prix_achat_catalogue_ht,
+    prix_achat_magasin_ht,
+    taux_tva,
+    prix_vente_remise_ttc,
     rabais_et_remise_ttc,
     detail_type_id
 
