@@ -20,5 +20,7 @@ select
         then 1
         else 0
     end as client_facing_fixe,
+    family_name as nomFamille,
+    family_chief_client_id as idClient_chefFamille,
     update_datetime
 from source
