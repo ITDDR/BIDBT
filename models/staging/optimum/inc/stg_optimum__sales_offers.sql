@@ -9,5 +9,6 @@ source as (
 select
     sale_offer_id,
     sale_offer_name,
-    update_datetime
+    update_datetime,
+    export_date
 from source

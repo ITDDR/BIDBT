@@ -16,7 +16,7 @@ ranked as (
 
         row_number() over (
             partition by package_id
-            order by update_datetime desc
+            order by update_datetime desc, export_date desc
         ) as row_num
 
     from source

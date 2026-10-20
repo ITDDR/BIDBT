@@ -15,7 +15,7 @@ ranked as (
 
         row_number() over (
             partition by shop_id, article_code
-            order by update_datetime desc
+            order by update_datetime desc, export_date desc
         ) as row_num
 
     from source

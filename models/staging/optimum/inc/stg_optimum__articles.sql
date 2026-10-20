@@ -11,5 +11,6 @@ select
     article_name as nom_article,
     shop_id,
     article_type_id,
-    update_datetime
+    update_datetime,
+    export_date
 from source

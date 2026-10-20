@@ -1,0 +1,47 @@
+version: 2
+
+# Only the full-export staging models are tested for uniqueness here:
+# they are not deduplicated downstream, so a duplicate would fan out every join.
+# Incremental staging models are covered by their source test (key, export_date)
+# and by their deduplicated int_ model.
+
+models:
+  - name: stg_optimum__shops
+    columns:
+      - name: shop_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__articles_types
+    columns:
+      - name: article_type_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__frame_types
+    columns:
+      - name: frame_type_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__packages_details_types
+    columns:
+      - name: package_detail_type_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__packages_status
+    columns:
+      - name: package_status_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__prescriptors
+    columns:
+      - name: prescriptor_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__proposals_status
+    columns:
+      - name: proposal_status_id
+        data_tests: [unique, not_null]
+
+  - name: stg_optimum__sellers
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]

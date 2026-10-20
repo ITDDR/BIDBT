@@ -10,5 +10,6 @@ select
     proposal_id,
     visit_id,
     proposals_status_id as proposal_status_id,
-    update_datetime
+    update_datetime,
+    export_date
 from source

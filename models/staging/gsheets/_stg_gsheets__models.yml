@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_gsheets__canaux_acquisition
+    description: "Acquisition channels from the MasterData_BI sheet. One row per provenance."
+    columns:
+      - name: provenance
+        description: "Join key to int_clients.provenance. A duplicated line in the sheet would duplicate clients downstream."
+        data_tests: [unique, not_null]

@@ -12,5 +12,6 @@ select
     proposal_id,
     cast(creation_datetime as date) as package_creation_date,
     update_datetime,
+    export_date,
     to_review_sale_offer
 from source

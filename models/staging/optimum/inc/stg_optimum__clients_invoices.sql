@@ -12,5 +12,6 @@ select
     client_id as idClient,
     cast(creation_datetime as date) as client_invoice_creation_date,
     update_datetime,
+    export_date,
     shop_id
 from source

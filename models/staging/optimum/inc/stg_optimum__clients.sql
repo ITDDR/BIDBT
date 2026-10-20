@@ -22,5 +22,7 @@ select
     end as client_facing_fixe,
     family_name as nomFamille,
     family_chief_client_id as idClient_chefFamille,
-    update_datetime
+    creation_datetime,
+    update_datetime,
+    export_date
 from source
