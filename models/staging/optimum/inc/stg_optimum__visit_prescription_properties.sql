@@ -9,5 +9,6 @@ source as (
 select
     visit_id,
     prescriptor_id,
-    update_datetime
+    update_datetime,
+    export_date
 from source

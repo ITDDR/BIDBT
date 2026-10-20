@@ -10,5 +10,6 @@ select
     visit_id,
     seller_id,
     cast(creation_datetime as date) as visit_creation_date,
-    update_datetime
+    update_datetime,
+    export_date
 from source

@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: gsheets
+    description: "Google Sheets exposed in BigQuery as external tables (read live at every query). Spreadsheet: MasterData_BI."
+    database: "project-b2a3ecb7-3b81-4883-82d"
+    schema: raw_gsheets
+
+    tables:
+      - name: canaux_acquisition
+        description: "Tab 'canaux acquisition': acquisition channel (provenance) -> groupe, famille canal, couts. Joins to clients.provenance."
+        columns:
+          - name: provenance
+            description: "Acquisition channel label, same values as stg_optimum__clients.provenance"
+          - name: groupe
+            description: "Mag / HLM"
+          - name: famille_canal
+            description: "MARKETING, PARTENARIAT, SATISFACTION CLIENT, Prospection Pro"
+          - name: couts
+            description: "Cost type (e.g. gratuit); often empty"
