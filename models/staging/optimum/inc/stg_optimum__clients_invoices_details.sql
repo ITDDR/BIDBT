@@ -12,6 +12,5 @@ select
     content,
     package_id,
     package_detail_id,
-    eye_side,
     export_date
 from source

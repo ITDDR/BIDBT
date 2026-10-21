@@ -13,7 +13,6 @@ ranked as (
         content,
         package_id,
         package_detail_id,
-        eye_side,
 
         row_number() over (
             partition by client_invoice_detail_id
@@ -29,7 +28,6 @@ select
     client_invoice_id,
     content,
     package_id,
-    package_detail_id,
-    eye_side
+    package_detail_id
 from ranked
 where row_num = 1
