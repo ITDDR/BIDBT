@@ -157,5 +157,10 @@ models:
 
   - name: int_partenariat
     columns:
+      - name: idClient_chefFamille
+        data_tests: [unique, not_null]
+
+  - name: int_partenariat_sans_famille
+    columns:
       - name: idClient
         data_tests: [unique, not_null]

@@ -16,12 +16,9 @@ select
     cpc.date_premiere_facture,
 
     s.shop_id,
-    s.ville_magasin,
 
     cid.content,
-    cid.eye_side,
 
-    a.article_code,
     a.nom_article,
     pd.nom_article_package,
     pd.quantite_produit,
@@ -31,17 +28,12 @@ select
     pd.prix_vente_remise_ttc,
     pd.rabais_et_remise_ttc,
 
-    ft.frame_type_name,
     case pdt.package_datail_type_name
         when 'monture' then concat('monture ', ft.frame_type_name)
         else pdt.package_datail_type_name
     end as package_detail_type_ddr,
-    pdt.package_datail_type_name,
 
-    ps.package_status,
     ps.package_status_definition,
-    prs.proposal_status,
-    prs.proposal_status_definition,
 
     p.package_creation_date,
     v.visit_creation_date,
@@ -63,7 +55,6 @@ left join {{ ref('int_articles') }} as a using (shop_id, article_code)
 left join {{ ref('int_articles_types') }} as aty using (article_type_id)
 
 left join {{ ref('int_proposals') }} as pr using (proposal_id)
-left join {{ ref('int_proposals_status') }} as prs using (proposal_status_id)
 left join {{ ref('int_visits') }} as v using (visit_id)
 left join {{ ref('int_packages_packages_statuts_types') }} as ppst using (package_id)
 left join {{ ref('int_sellers') }} as sel on sel.seller_id = ppst.proposition_personne_id

@@ -57,6 +57,54 @@ members_agg as (
     from member_provenance_counts
     group by idClient_chefFamille
 
+),
+
+invoices as (
+
+    select *
+    from {{ ref('int_client_invoices') }}
+
+),
+
+shops as (
+
+    select *
+    from {{ ref('int_shops') }}
+
+),
+
+family_shop_invoice_counts as (
+
+    select
+        clients.idClient_chefFamille,
+        coalesce(cast(shops.shop_id as string), 'NULL') as shop_id,
+        count(distinct invoices.client_invoice_id) as nb_factures_magasin
+
+    from clients
+    inner join invoices
+        on clients.idClient = invoices.idClient
+    left join shops
+        on invoices.shop_id = shops.shop_id
+    where clients.idClient_chefFamille is not null
+
+    group by clients.idClient_chefFamille, shops.shop_id
+
+),
+
+family_invoices_agg as (
+
+    select
+        idClient_chefFamille,
+        sum(nb_factures_magasin) as nb_factures_famille,
+        string_agg(
+            shop_id || ' (' || cast(nb_factures_magasin as string) || ')',
+            ', '
+            order by nb_factures_magasin desc
+        ) as magasins_factures_famille
+
+    from family_shop_invoice_counts
+    group by idClient_chefFamille
+
 )
 
 select
@@ -66,8 +114,12 @@ select
     chefs_partenariat.idClient_chefFamille,
     chefs_partenariat.provenance as provenance_chef,
     coalesce(members_agg.nb_membres_famille, 0) as nb_membres_famille,
-    members_agg.provenances_membres
+    members_agg.provenances_membres,
+    coalesce(family_invoices_agg.nb_factures_famille, 0) as nb_factures_famille,
+    family_invoices_agg.magasins_factures_famille
 
 from chefs_partenariat
 left join members_agg
     on chefs_partenariat.idClient_chefFamille = members_agg.idClient_chefFamille
+left join family_invoices_agg
+    on chefs_partenariat.idClient_chefFamille = family_invoices_agg.idClient_chefFamille
