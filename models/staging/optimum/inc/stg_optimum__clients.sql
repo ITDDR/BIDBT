@@ -9,20 +9,11 @@ source as (
 select
     client_id as idClient,
     client_origin as provenance,
-    case 
-        when REGEXP_CONTAINS(upper(last_name), 'VENTE_LIBRE') or
-             (REGEXP_CONTAINS(upper(last_name), 'VENTE') and REGEXP_CONTAINS(upper(first_name), 'DIRECTE'))
-        then 1
-        else 0
-    end as client_vente_directe,
-    case 
-        when REGEXP_CONTAINS(upper(last_name), 'FACING') 
-        then 1
-        else 0
-    end as client_facing_fixe,
     family_name as nomFamille,
     family_chief_client_id as idClient_chefFamille,
-    creation_datetime,
+    cast(creation_datetime as date) as creation_date,
+    extract(year from creation_datetime) as annee_creation,
+    extract(month from creation_datetime) as mois_creation,
     update_datetime,
     export_date
 from source

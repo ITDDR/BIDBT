@@ -11,10 +11,10 @@ ranked as (
         credit_note_invoice_id,
         quantity,
         credit_note_value_with_vat,
-        client_invoice_detail_id,
+        facture_detail_id,
 
         row_number() over (
-            partition by credit_note_invoice_id, client_invoice_detail_id
+            partition by credit_note_invoice_id, facture_detail_id
             order by export_date desc
         ) as row_num
 
@@ -26,6 +26,6 @@ select
     credit_note_invoice_id,
     quantity,
     credit_note_value_with_vat,
-    client_invoice_detail_id
+    facture_detail_id
 from ranked
 where row_num = 1

@@ -10,11 +10,11 @@ ranked as (
     select
         article_code,
         nom_article,
-        shop_id,
+        idMagasin,
         article_type_id,
 
         row_number() over (
-            partition by shop_id, article_code
+            partition by idMagasin, article_code
             order by update_datetime desc, export_date desc
         ) as row_num
 
@@ -23,7 +23,7 @@ ranked as (
 )
 
 select
-    shop_id,
+    idMagasin,
     article_code,
     nom_article,
     article_type_id

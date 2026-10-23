@@ -1,1 +1,0 @@
-select shop_id, nom_magasin from {{ ref('stg_optimum__shops') }}

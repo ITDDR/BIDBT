@@ -1,7 +1,5 @@
 select
     provenance,
-    client_vente_directe,
-    client_facing_fixe,
 
     no_facture,
     quantite_produit,
@@ -14,14 +12,20 @@ select
     taux_tva,
     prix_vente_remise_ttc,
     rabais_et_remise_ttc,
-    package_status_definition,
-    client_invoice_creation_date,
-    package_creation_date,
-    visit_creation_date,
+    definition_statut_package,
+    date_creation_facture,
+    date_creation_package,
+    date_creation_visite,
+    date_proposition,
     date_premiere_facture,
     idClient,
-    shop_id,
+    date_operation_partenariat,
+    idMagasin,
     nom_vendeur_proposition,
     sale_offer_name,
-    nom_prescripteur
-from {{ ref('int_client_invoices_details_enriched') }}
+    nom_prescripteur,
+
+    date_avoir,
+    avoir_quantite,
+    avoir_montant_ht
+from {{ ref('int_factures_details_enriched') }}

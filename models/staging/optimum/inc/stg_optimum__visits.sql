@@ -8,8 +8,10 @@ source as (
 
 select
     visit_id,
+    client_id as idClient,
+    shop_id as idMagasin,
     seller_id,
-    cast(creation_datetime as date) as visit_creation_date,
+    cast(creation_datetime as date) as date_creation_visite,
     update_datetime,
     export_date
 from source

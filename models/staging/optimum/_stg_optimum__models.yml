@@ -8,7 +8,7 @@ version: 2
 models:
   - name: stg_optimum__shops
     columns:
-      - name: shop_id
+      - name: idMagasin
         data_tests: [unique, not_null]
 
   - name: stg_optimum__articles_types

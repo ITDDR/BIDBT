@@ -17,7 +17,9 @@ clients_partenariat as (
     select
         clients.idClient,
         clients.provenance,
-        clients.creation_datetime
+        clients.creation_date,
+        clients.annee_creation,
+        clients.mois_creation
 
     from clients
     inner join canaux_acquisition
@@ -30,56 +32,106 @@ clients_partenariat as (
 invoices as (
 
     select *
-    from {{ ref('int_client_invoices') }}
+    from {{ ref('int_factures') }}
 
 ),
 
-shops as (
-
-    select *
-    from {{ ref('int_shops') }}
-
-),
-
-client_shop_invoice_counts as (
-
-    select
-        invoices.idClient,
-        coalesce(cast(shops.shop_id as string), 'NULL') as shop_id,
-        count(distinct invoices.client_invoice_id) as nb_factures_magasin
-
-    from invoices
-    left join shops
-        on invoices.shop_id = shops.shop_id
-
-    group by invoices.idClient, shops.shop_id
-
-),
-
-client_invoices_agg as (
+factures_agg as (
 
     select
         idClient,
-        sum(nb_factures_magasin) as nb_factures,
-        string_agg(
-            shop_id || ' (' || cast(nb_factures_magasin as string) || ')',
-            ', '
-            order by nb_factures_magasin desc
-        ) as magasins_factures
+        count(distinct facture_id) as nb_factures
 
-    from client_shop_invoice_counts
+    from invoices
     group by idClient
+
+),
+
+client_month_invoice_counts as (
+
+    select
+        clients_partenariat.idClient,
+        format_date('%Y-%m', invoices.date_creation_facture) as mois_facture,
+        count(distinct invoices.facture_id) as nb_factures_mois,
+        count(distinct if(
+            invoices.date_creation_facture < clients_partenariat.creation_date,
+            invoices.facture_id,
+            null
+        )) as nb_factures_mois_avant_creation
+
+    from clients_partenariat
+    inner join invoices
+        on clients_partenariat.idClient = invoices.idClient
+
+    group by clients_partenariat.idClient, mois_facture
+
+),
+
+client_months_agg as (
+
+    select
+        idClient,
+        string_agg(
+            mois_facture || ' (' || cast(nb_factures_mois as string) || ')',
+            ', '
+            order by mois_facture
+        ) as mois_factures,
+        sum(nb_factures_mois_avant_creation) as nb_factures_avant_creation,
+        string_agg(
+            if(
+                nb_factures_mois_avant_creation > 0,
+                mois_facture || ' (' || cast(nb_factures_mois_avant_creation as string) || ')',
+                null
+            ),
+            ', '
+            order by mois_facture
+        ) as mois_factures_avant_creation
+
+    from client_month_invoice_counts
+    group by idClient
+
+),
+
+invoice_lines as (
+
+    select *
+    from {{ ref('int_factures_extended') }}
+
+),
+
+client_ca_agg as (
+
+    select
+        clients_partenariat.idClient,
+        sum(
+            invoice_lines.prix_vente_remise_ttc / (1 + invoice_lines.taux_tva / 100)
+            * abs(invoice_lines.quantite_produit)
+        ) as ca_ht_apres_creation
+
+    from clients_partenariat
+    inner join invoice_lines
+        on clients_partenariat.idClient = invoice_lines.idClient
+    where invoice_lines.date_creation_facture >= clients_partenariat.creation_date
+
+    group by clients_partenariat.idClient
 
 )
 
 select
-    extract(year from clients_partenariat.creation_datetime) as annee_creation,
-    extract(month from clients_partenariat.creation_datetime) as mois_creation,
+    clients_partenariat.annee_creation,
+    clients_partenariat.mois_creation,
     clients_partenariat.idClient,
     clients_partenariat.provenance,
-    coalesce(client_invoices_agg.nb_factures, 0) as nb_factures,
-    client_invoices_agg.magasins_factures
+    coalesce(factures_agg.nb_factures, 0) as nb_factures,
+    client_months_agg.mois_factures,
+    coalesce(client_months_agg.nb_factures_avant_creation, 0) as nb_factures_avant_creation,
+    client_months_agg.mois_factures_avant_creation,
+    coalesce(client_ca_agg.ca_ht_apres_creation, 0) as ca_ht_apres_creation
 
 from clients_partenariat
-left join client_invoices_agg
-    on clients_partenariat.idClient = client_invoices_agg.idClient
+left join factures_agg
+    on clients_partenariat.idClient = factures_agg.idClient
+left join client_months_agg
+    on clients_partenariat.idClient = client_months_agg.idClient
+left join client_ca_agg
+    on clients_partenariat.idClient = client_ca_agg.idClient

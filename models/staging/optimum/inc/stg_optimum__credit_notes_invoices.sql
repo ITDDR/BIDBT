@@ -11,6 +11,6 @@ select
     client_id as idClient,
     credit_note_invoice_ref,
     cast(creation_datetime as date) as creation_date,
-    shop_id,
+    shop_id as idMagasin,
     export_date
 from source

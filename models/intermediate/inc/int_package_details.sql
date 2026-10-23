@@ -9,6 +9,7 @@ ranked as (
 
     select
         package_detail_id,
+        package_id,
         article_code,
         nom_article_package,
         quantite_produit,
@@ -29,6 +30,7 @@ ranked as (
 
 select
     package_detail_id,
+    package_id,
     article_code,
     nom_article_package,
     quantite_produit,

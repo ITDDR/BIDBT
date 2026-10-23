@@ -10,11 +10,11 @@ ranked as (
     select
         idClient,
         provenance,
-        client_vente_directe,
-        client_facing_fixe,
         nomFamille,
         idClient_chefFamille,
-        creation_datetime,
+        creation_date,
+        annee_creation,
+        mois_creation,
         row_number() over (
             partition by idClient
             order by update_datetime desc, export_date desc
@@ -22,16 +22,40 @@ ranked as (
 
     from source
 
+),
+
+deduped as (
+
+    select
+        idClient,
+        provenance,
+        nomFamille,
+        idClient_chefFamille,
+        creation_date,
+        annee_creation,
+        mois_creation
+
+    from ranked
+    where row_num = 1
+
 )
 
 select
-   idClient,
-        provenance,
-        client_vente_directe,
-        client_facing_fixe,
-        nomFamille,
-        idClient_chefFamille,
-        creation_datetime,
+    d.idClient,
+    d.provenance,
+    d.nomFamille,
+    d.idClient_chefFamille,
+    d.creation_date,
+    d.annee_creation,
+    d.mois_creation,
 
-from ranked
-where row_num = 1
+    chef.provenance as provenance_chef_famille,
+
+    date(
+        2000 + safe_cast(regexp_extract(d.nomFamille, r'([0-9]{2})_[0-9]{2}') as int64),
+        safe_cast(regexp_extract(d.nomFamille, r'[0-9]{2}_([0-9]{2})') as int64),
+        1
+    ) as date_operation_partenariat
+
+from deduped as d
+left join deduped as chef on d.idClient_chefFamille = chef.idClient

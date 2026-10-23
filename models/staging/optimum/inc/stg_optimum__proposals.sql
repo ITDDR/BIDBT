@@ -10,6 +10,7 @@ select
     proposal_id,
     visit_id,
     proposals_status_id as proposal_status_id,
+    cast(creation_datetime as date) as date_proposition,
     update_datetime,
     export_date
 from source

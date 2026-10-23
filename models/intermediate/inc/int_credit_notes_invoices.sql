@@ -12,7 +12,7 @@ ranked as (
         idClient,
         credit_note_invoice_ref,
         creation_date,
-        shop_id,
+        idMagasin,
 
         row_number() over (
             partition by credit_note_invoice_id
@@ -28,6 +28,6 @@ select
     idClient,
     credit_note_invoice_ref,
     creation_date,
-    shop_id
+    idMagasin
 from ranked
 where row_num = 1
