@@ -9,7 +9,7 @@ models:
 
   - name: int_shops
     columns:
-      - name: shop_id
+      - name: idMagasin
         data_tests: [unique, not_null]
 
   - name: int_articles_types
@@ -50,13 +50,13 @@ models:
   # ---------- deduplicated incremental tables (latest version per key) ----------
 
   - name: int_articles
-    description: "Latest article per (shop_id, article_code), the key used to join package details."
+    description: "Latest article per (idMagasin, article_code), the key used to join package details."
     data_tests:
       - dbt_utils.unique_combination_of_columns:
           arguments:
-            combination_of_columns: [shop_id, article_code]
+            combination_of_columns: [idMagasin, article_code]
     columns:
-      - name: shop_id
+      - name: idMagasin
         data_tests: [not_null]
       - name: article_code
         data_tests: [not_null]
@@ -66,20 +66,20 @@ models:
       - name: idClient
         data_tests: [unique, not_null]
 
-  - name: int_client_invoices
+  - name: int_factures
     columns:
-      - name: client_invoice_id
+      - name: facture_id
         data_tests: [unique, not_null]
       - name: idClient
         data_tests: [not_null]
-      - name: shop_id
+      - name: idMagasin
         data_tests: [not_null]
 
-  - name: int_client_invoices_details
+  - name: int_factures_details
     columns:
-      - name: client_invoice_detail_id
+      - name: facture_detail_id
         data_tests: [unique, not_null]
-      - name: client_invoice_id
+      - name: facture_id
         data_tests: [not_null]
 
   - name: int_credit_notes_invoices
@@ -88,18 +88,18 @@ models:
         data_tests: [unique, not_null]
       - name: idClient
         data_tests: [not_null]
-      - name: shop_id
+      - name: idMagasin
         data_tests: [not_null]
 
   - name: int_credit_notes_invoices_details
     data_tests:
       - dbt_utils.unique_combination_of_columns:
           arguments:
-            combination_of_columns: [credit_note_invoice_id, client_invoice_detail_id]
+            combination_of_columns: [credit_note_invoice_id, facture_detail_id]
     columns:
       - name: credit_note_invoice_id
         data_tests: [not_null]
-      - name: client_invoice_detail_id
+      - name: facture_detail_id
         data_tests: [not_null]
 
   - name: int_packages
@@ -144,10 +144,10 @@ models:
 
   # ---------- derived models ----------
 
-  - name: int_client_invoices_details_enriched
+  - name: int_factures_details_enriched
     description: "One row per client invoice line with all line-level joins. Shared by both *_extended models."
     columns:
-      - name: client_invoice_detail_id
+      - name: facture_detail_id
         data_tests: [unique, not_null]
 
   - name: client_premiere_facture

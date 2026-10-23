@@ -11,6 +11,7 @@ ranked as (
         proposal_id,
         visit_id,
         proposal_status_id,
+        date_proposition,
 
         row_number() over (
             partition by proposal_id
@@ -24,6 +25,7 @@ ranked as (
 select
     proposal_id,
         visit_id,
-        proposal_status_id
+        proposal_status_id,
+        date_proposition
 from ranked
 where row_num = 1

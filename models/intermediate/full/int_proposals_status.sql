@@ -1,5 +1,5 @@
  select
         proposal_status_id,
         proposal_status,
-        proposal_status_definition
+        definition_statut_proposition
 from {{ ref('stg_optimum__proposals_status') }}

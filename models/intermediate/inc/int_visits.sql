@@ -9,8 +9,10 @@ ranked as (
 
     select
         visit_id,
+        idClient,
+        idMagasin,
         seller_id,
-        visit_creation_date,
+        date_creation_visite,
         row_number() over (
             partition by visit_id
             order by update_datetime desc, export_date desc
@@ -22,7 +24,9 @@ ranked as (
 
 select
     visit_id,
+    idClient,
+    idMagasin,
     seller_id,
-    visit_creation_date
+    date_creation_visite
 from ranked
 where row_num = 1

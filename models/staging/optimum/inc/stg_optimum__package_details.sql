@@ -7,6 +7,7 @@ with source as (
 
 select
     detail_id as package_detail_id,
+    package_id,
     article_code,
     name as nom_article_package,
     product_quantity as quantite_produit,

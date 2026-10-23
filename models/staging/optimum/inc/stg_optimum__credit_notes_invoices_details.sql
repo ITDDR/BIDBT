@@ -11,6 +11,6 @@ select
     quantity,
     credit_note_value_without_vat,
     credit_note_value_with_vat,
-    client_invoice_detail_id,
+    client_invoice_detail_id as facture_detail_id,
     export_date
 from source
