@@ -16,8 +16,9 @@ clients_partenariat as (
 
     select
         clients.idClient,
+        clients.nomFamille,
         clients.provenance,
-        clients.creation_date
+        clients.date_creation
 
     from clients
     inner join canaux_acquisition
@@ -52,7 +53,7 @@ client_month_invoice_counts as (
         format_date('%Y-%m', invoices.date_creation_facture) as mois_facture,
         count(distinct invoices.facture_id) as nb_factures_mois,
         count(distinct if(
-            invoices.date_creation_facture < clients_partenariat.creation_date,
+            invoices.date_creation_facture < clients_partenariat.date_creation,
             invoices.facture_id,
             null
         )) as nb_factures_mois_avant_creation
@@ -109,7 +110,7 @@ client_ca_agg as (
     from clients_partenariat
     inner join invoice_lines
         on clients_partenariat.idClient = invoice_lines.idClient
-    where invoice_lines.date_creation_facture >= clients_partenariat.creation_date
+    where invoice_lines.date_creation_facture >= clients_partenariat.date_creation
 
     group by clients_partenariat.idClient
 
@@ -117,6 +118,7 @@ client_ca_agg as (
 
 select
     clients_partenariat.idClient,
+    clients_partenariat.nomFamille,
     clients_partenariat.provenance,
     coalesce(factures_agg.nb_factures, 0) as nb_factures,
     client_months_agg.mois_factures,

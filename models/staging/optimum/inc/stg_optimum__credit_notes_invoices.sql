@@ -9,7 +9,7 @@ source as (
 select
     credit_note_invoice_id,
     client_id as idClient,
-    credit_note_invoice_ref,
+    credit_note_invoice_ref as noAvoir,
     cast(creation_datetime as date) as creation_date,
     shop_id as idMagasin,
     export_date

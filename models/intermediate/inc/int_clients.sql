@@ -10,9 +10,10 @@ ranked as (
     select
         idClient,
         provenance,
+        nomFamille,
         operation_partenariat,
         idClient_chefFamille,
-        creation_date,
+        date_creation,
         ville,
         row_number() over (
             partition by idClient
@@ -28,9 +29,10 @@ deduped as (
     select
         idClient,
         provenance,
+        nomFamille,
         operation_partenariat,
         idClient_chefFamille,
-        creation_date,
+        date_creation,
         ville
 
     from ranked
@@ -42,9 +44,10 @@ withChef as (
     select
     d.idClient,
     d.provenance,
+    d.nomFamille,
     d.operation_partenariat,
     d.idClient_chefFamille,
-    d.creation_date,
+    d.date_creation,
 
     chef.provenance as provenance_chef_famille,
     d.ville
