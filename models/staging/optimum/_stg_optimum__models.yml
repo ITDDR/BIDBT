@@ -11,11 +11,6 @@ models:
       - name: idMagasin
         data_tests: [unique, not_null]
 
-  - name: stg_optimum__articles_types
-    columns:
-      - name: article_type_id
-        data_tests: [unique, not_null]
-
   - name: stg_optimum__frame_types
     columns:
       - name: frame_type_id

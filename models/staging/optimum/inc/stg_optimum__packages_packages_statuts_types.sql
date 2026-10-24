@@ -10,7 +10,7 @@ renamed as (
 
     select
         package_id,
-        proposition_date,
+        proposition_date as date_proposition,
         proposition_personne_id,
         export_date
         

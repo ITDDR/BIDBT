@@ -1,11 +1,14 @@
 select
-    idClient,
-    provenance,
-    nomFamille,
-    idClient_chefFamille,
-    creation_date,
-    annee_creation,
-    mois_creation,
-    provenance_chef_famille,
-    date_operation_partenariat
-from {{ ref('int_clients') }}
+    c.idClient,
+    c.provenance,
+    c.operation_partenariat,
+    c.idClient_chefFamille,
+    c.creation_date,
+    c.provenance_chef_famille,
+    date_operation_partenariat,
+    charge_de_dev,
+    cpc.date_premiere_facture
+
+from {{ ref('int_clients') }} as c
+left join {{ ref('client_premiere_facture') }} as cpc on cpc.idClient = c.idClient
+

@@ -26,6 +26,7 @@ with unioned as (
         nom_vendeur_proposition,
         idClient,
         date_operation_partenariat,
+        operation_partenariat,
         sale_offer_name,
         nom_prescripteur,
 
@@ -62,6 +63,7 @@ with unioned as (
         nom_vendeur_proposition,
         idClient,
         date_operation_partenariat,
+        operation_partenariat,
         sale_offer_name,
         nom_prescripteur,
 

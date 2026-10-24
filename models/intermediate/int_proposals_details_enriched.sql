@@ -19,11 +19,14 @@ select
     clv.creation_date as date_creation_client_visite,
     cl.creation_date as date_creation_client_facture,
 
-    clv.date_operation_partenariat as date_operation_partenariat_visite,
-    cl.date_operation_partenariat as date_operation_partenariat_facture,
+    opv.date_operation_partenariat as date_operation_partenariat_visite,
+    opf.date_operation_partenariat as date_operation_partenariat_facture,
 
     clv.provenance_chef_famille as provenance_chef_famille_visite,
     cl.provenance_chef_famille as provenance_chef_famille_facture,
+
+    clv.operation_partenariat as operation_partenariat_visite,
+    cl.operation_partenariat as operation_partenariat_facture,
 
     cpci.date_premiere_facture as date_premiere_facture_client,
 
@@ -41,9 +44,9 @@ select
     pd.prix_vente_remise_ttc,
     pd.rabais_et_remise_ttc,
 
-    case pdt.package_datail_type_name
+    case pdt.nom_type_detail_package
         when 'monture' then concat('monture ', ft.frame_type_name)
-        else pdt.package_datail_type_name
+        else pdt.nom_type_detail_package
     end as package_detail_type_ddr,
 
     ps.definition_statut_package,
@@ -70,6 +73,10 @@ left join {{ ref('int_visits') }} as v on v.visit_id = coalesce(p.visit_id, pr.v
 
 left join {{ ref('int_clients') }} as cl on cl.idClient = ci.idClient
 left join {{ ref('int_clients') }} as clv on clv.idClient = v.idClient
+left join {{ ref('int_operation_partenariat') }} as opf
+    on opf.operation_partenariat = cl.operation_partenariat and opf.provenance = cl.provenance
+left join {{ ref('int_operation_partenariat') }} as opv
+    on opv.operation_partenariat = clv.operation_partenariat and opv.provenance = clv.provenance
 
 left join {{ ref('client_premiere_facture') }} as cpci on cpci.idClient = ci.idClient
 left join {{ ref('int_shops') }} as s on s.idMagasin = v.idMagasin

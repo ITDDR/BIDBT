@@ -22,6 +22,7 @@ select
     e.idClient,
     e.date_operation_partenariat,
     e.provenance_chef_famille,
+    e.operation_partenariat,
     e.idMagasin,
     e.nom_magasin,
     e.nom_article_package,

@@ -4,5 +4,5 @@ with source as (
 
 select
     seller_id,
-    concat(last_name, ' ',first_name) as nom_vendeur
+    concat(coalesce(last_name, ''), ' ', coalesce(first_name, '')) as nom_vendeur
 from source

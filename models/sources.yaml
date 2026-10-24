@@ -58,11 +58,6 @@ sources:
           - name: seller_id
             data_tests: [unique, not_null]
 
-      - name: visits_status
-        columns:
-          - name: visit_status_id
-            data_tests: [unique, not_null]
-
       # ---------- incremental exports ----------
 
       - name: articles
