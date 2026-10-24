@@ -9,7 +9,7 @@ ranked as (
 
     select
         package_id,
-        proposition_date,
+        date_proposition,
         proposition_personne_id,
 
         row_number() over (
@@ -23,7 +23,7 @@ ranked as (
 
 select
     package_id,
-        proposition_date,
+        date_proposition,
         proposition_personne_id
 from ranked
 where row_num = 1

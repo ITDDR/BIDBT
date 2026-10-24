@@ -20,6 +20,8 @@ with unioned as (
         date_operation_partenariat_facture,
         provenance_chef_famille_visite,
         provenance_chef_famille_facture,
+        operation_partenariat_visite,
+        operation_partenariat_facture,
         date_premiere_facture_client,
 
         no_facture,
@@ -67,6 +69,8 @@ with unioned as (
         date_operation_partenariat as date_operation_partenariat_facture,
         cast(null as string) as provenance_chef_famille_visite,
         provenance_chef_famille as provenance_chef_famille_facture,
+        cast(null as string) as operation_partenariat_visite,
+        operation_partenariat as operation_partenariat_facture,
         date_premiere_facture as date_premiere_facture_client,
 
         no_facture,

@@ -17,9 +17,7 @@ clients_partenariat as (
     select
         clients.idClient,
         clients.provenance,
-        clients.creation_date,
-        clients.annee_creation,
-        clients.mois_creation
+        clients.creation_date
 
     from clients
     inner join canaux_acquisition
@@ -118,8 +116,6 @@ client_ca_agg as (
 )
 
 select
-    clients_partenariat.annee_creation,
-    clients_partenariat.mois_creation,
     clients_partenariat.idClient,
     clients_partenariat.provenance,
     coalesce(factures_agg.nb_factures, 0) as nb_factures,

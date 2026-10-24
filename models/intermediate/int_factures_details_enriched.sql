@@ -11,8 +11,9 @@ select
 
     cl.idClient,
     cl.provenance,
-    cl.date_operation_partenariat,
     cl.provenance_chef_famille,
+    cl.operation_partenariat,
+    cl.date_operation_partenariat,
     cpc.date_premiere_facture,
 
     s.idMagasin,
@@ -29,9 +30,9 @@ select
     pd.prix_vente_remise_ttc,
     pd.rabais_et_remise_ttc,
 
-    case pdt.package_datail_type_name
+    case pdt.nom_type_detail_package
         when 'monture' then concat('monture ', ft.frame_type_name)
-        else pdt.package_datail_type_name
+        else pdt.nom_type_detail_package
     end as package_detail_type_ddr,
 
     ps.definition_statut_package,
@@ -51,6 +52,7 @@ select
 from {{ ref('int_factures_details') }} as cid
 join {{ ref('int_factures') }} as ci using (facture_id)
 left join {{ ref('int_clients') }} as cl using (idClient)
+
 left join {{ ref('client_premiere_facture') }} as cpc using (idClient)
 join {{ ref('int_shops') }} as s using (idMagasin)
 
@@ -58,7 +60,6 @@ join {{ ref('int_packages') }} as p using (package_id)
 left join {{ ref('int_packages_status') }} as ps using (package_status_id)
 left join {{ ref('int_package_details') }} as pd using (package_detail_id)
 left join {{ ref('int_articles') }} as a using (idMagasin, article_code)
-left join {{ ref('int_articles_types') }} as aty using (article_type_id)
 
 left join {{ ref('int_proposals') }} as pr using (proposal_id)
 left join {{ ref('int_visits') }} as v on v.visit_id = pr.visit_id

@@ -16,11 +16,9 @@ chefs_partenariat as (
 
     select
         clients.idClient_chefFamille,
-        clients.nomFamille,
+        clients.operation_partenariat as nomFamille,
         clients.provenance,
-        clients.creation_date,
-        clients.annee_creation,
-        clients.mois_creation
+        clients.creation_date
 
     from clients
     inner join canaux_acquisition
@@ -158,8 +156,6 @@ family_ca_agg as (
 )
 
 select
-    chefs_partenariat.annee_creation,
-    chefs_partenariat.mois_creation,
     chefs_partenariat.nomFamille,
     chefs_partenariat.idClient_chefFamille,
     chefs_partenariat.provenance as provenance_chef,

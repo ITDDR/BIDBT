@@ -1,4 +1,4 @@
 select
         package_detail_type_id,
-        package_datail_type_name
+        nom_type_detail_package
 from {{ ref('stg_optimum__packages_details_types') }}
