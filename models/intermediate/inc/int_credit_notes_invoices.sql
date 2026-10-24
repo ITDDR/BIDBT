@@ -10,7 +10,7 @@ ranked as (
     select
         credit_note_invoice_id,
         idClient,
-        credit_note_invoice_ref,
+        noAvoir,
         creation_date,
         idMagasin,
 
@@ -26,7 +26,7 @@ ranked as (
 select
     credit_note_invoice_id,
     idClient,
-    credit_note_invoice_ref,
+    noAvoir,
     creation_date,
     idMagasin
 from ranked

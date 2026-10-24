@@ -26,7 +26,8 @@ select
     nom_vendeur_proposition,
     sale_offer_name,
     nom_prescripteur,
-    date_avoir,
+    date_creation_avoir,
+    noAvoir,
     avoir_quantite,
     avoir_montant_ht
 from {{ ref('int_factures_extended') }}

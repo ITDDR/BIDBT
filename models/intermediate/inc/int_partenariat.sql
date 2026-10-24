@@ -16,9 +16,10 @@ chefs_partenariat as (
 
     select
         clients.idClient_chefFamille,
-        clients.operation_partenariat as nomFamille,
+        clients.nomFamille,
+        clients.operation_partenariat,
         clients.provenance,
-        clients.creation_date
+        clients.date_creation
 
     from clients
     inner join canaux_acquisition
@@ -88,7 +89,7 @@ family_month_invoice_counts as (
         format_date('%Y-%m', invoices.date_creation_facture) as mois_facture,
         count(distinct invoices.facture_id) as nb_factures_mois,
         count(distinct if(
-            invoices.date_creation_facture < chefs_partenariat.creation_date,
+            invoices.date_creation_facture < chefs_partenariat.date_creation,
             invoices.facture_id,
             null
         )) as nb_factures_mois_avant_creation
@@ -149,7 +150,7 @@ family_ca_agg as (
         on chefs_partenariat.idClient_chefFamille = clients.idClient_chefFamille
     inner join invoice_lines
         on clients.idClient = invoice_lines.idClient
-    where invoice_lines.date_creation_facture >= chefs_partenariat.creation_date
+    where invoice_lines.date_creation_facture >= chefs_partenariat.date_creation
 
     group by chefs_partenariat.idClient_chefFamille
 
@@ -157,6 +158,7 @@ family_ca_agg as (
 
 select
     chefs_partenariat.nomFamille,
+    chefs_partenariat.operation_partenariat,
     chefs_partenariat.idClient_chefFamille,
     chefs_partenariat.provenance as provenance_chef,
     coalesce(members_agg.nb_membres_famille, 0) as nb_membres_famille,

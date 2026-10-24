@@ -16,8 +16,8 @@ select
     ci.idClient as idClient_facture,
     clv.provenance as provenance_client_visite,
     cl.provenance as provenance_client_facture,
-    clv.creation_date as date_creation_client_visite,
-    cl.creation_date as date_creation_client_facture,
+    clv.date_creation as date_creation_client_visite,
+    cl.date_creation as date_creation_client_facture,
 
     opv.date_operation_partenariat as date_operation_partenariat_visite,
     opf.date_operation_partenariat as date_operation_partenariat_facture,

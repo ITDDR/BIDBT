@@ -1,11 +1,10 @@
 select
     c.idClient,
     c.provenance,
+    c.nomFamille,
     c.operation_partenariat,
-    c.idClient_chefFamille,
-    c.creation_date,
+    c.date_creation,
     c.provenance_chef_famille,
-    date_operation_partenariat,
     charge_de_dev,
     cpc.date_premiere_facture
 

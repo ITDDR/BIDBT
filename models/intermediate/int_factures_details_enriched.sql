@@ -45,7 +45,8 @@ select
     so.sale_offer_name,
     pres.nom_prescripteur,
 
-    cn.creation_date as date_avoir,
+    cn.creation_date as date_creation_avoir,
+    cn.noAvoir,
     cnd.quantity as avoir_quantite,
     round(cnd.credit_note_value_with_vat / (1 + pd.taux_tva / 100), 2) as avoir_montant_ht
 
