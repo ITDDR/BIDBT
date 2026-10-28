@@ -8,6 +8,7 @@ source as (
 
 select
     client_id as idClient,
+    shop_id as idMagasin,
     client_origin as provenance,
     family_name as nomFamille,
     case
