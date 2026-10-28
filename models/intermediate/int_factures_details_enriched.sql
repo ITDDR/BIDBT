@@ -55,12 +55,12 @@ join {{ ref('int_factures') }} as ci using (facture_id)
 left join {{ ref('int_clients') }} as cl using (idClient)
 
 left join {{ ref('client_premiere_facture') }} as cpc using (idClient)
-join {{ ref('int_shops') }} as s using (idMagasin)
+join {{ ref('int_shops') }} as s on s.idMagasin = ci.idMagasin
 
 join {{ ref('int_packages') }} as p using (package_id)
 left join {{ ref('int_packages_status') }} as ps using (package_status_id)
 left join {{ ref('int_package_details') }} as pd using (package_detail_id)
-left join {{ ref('int_articles') }} as a using (idMagasin, article_code)
+left join {{ ref('int_articles') }} as a on a.idMagasin = s.idMagasin and a.article_code = pd.article_code
 
 left join {{ ref('int_proposals') }} as pr using (proposal_id)
 left join {{ ref('int_visits') }} as v on v.visit_id = pr.visit_id

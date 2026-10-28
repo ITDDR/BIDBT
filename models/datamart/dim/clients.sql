@@ -1,5 +1,6 @@
 select
     c.idClient,
+    c.idMagasin,
     c.provenance,
     c.nomFamille,
     c.operation_partenariat,

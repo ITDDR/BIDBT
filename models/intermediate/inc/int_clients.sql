@@ -9,6 +9,7 @@ ranked as (
 
     select
         idClient,
+        idMagasin,
         provenance,
         nomFamille,
         operation_partenariat,
@@ -28,6 +29,7 @@ deduped as (
 
     select
         idClient,
+        idMagasin,
         provenance,
         nomFamille,
         operation_partenariat,
@@ -43,6 +45,7 @@ deduped as (
 withChef as (
     select
     d.idClient,
+    d.idMagasin,
     d.provenance,
     d.nomFamille,
     d.operation_partenariat,
