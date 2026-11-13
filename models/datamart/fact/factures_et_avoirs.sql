@@ -11,7 +11,7 @@ select
     no_facture,
     noAvoir,
     -1 * quantite_produit as quantite_produit,
-    cast(null as string) as package_detail_type_ddr,
+    package_detail_type_ddr,
     cast(null as string) as nom_article,
     cast(null as string) as nom_article_package,
     cast(null as string) as content,

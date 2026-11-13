@@ -8,6 +8,7 @@ select
     no_facture,
     noAvoir,
     quantite_produit,
+    package_detail_type_ddr,
     prix_vente_remise_ttc,
     rabais_et_remise_ttc,
     taux_tva,
